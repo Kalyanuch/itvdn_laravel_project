@@ -12,6 +12,7 @@ $factory->define(App\Gallery::class, function (Faker $faker) {
     ];
     return [
         'product_id' => null,
-        'photos' => serialize($photos)
+        //'photos' => serialize($photos)
+        'photos' => json_encode($photos)
     ];
 });
