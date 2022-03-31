@@ -45,12 +45,16 @@ class CatalogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $product = Product::where('slug', $slug)->first();
+
+        $gallery = json_decode($product->gallery->photos);
+
+        return view('catalog.show', ['product' => $product, 'gallery' => $gallery]);
     }
 
     /**
