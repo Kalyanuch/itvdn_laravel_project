@@ -21,10 +21,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/my_test', function(){ return 'Hello world! This is my test route :)'; });
+//Route::get('/my_test', function(){ return 'Hello world! This is my test route :)'; });
 
-Route::get('/my_test/new/{id?}', function($id = 'default') { return 'Hello world! This is my test route with not required parameter. If you do not type parameter value function start using it\'s default value ID = ' . $id; });
+//Route::get('/my_test/new/{id?}', function($id = 'default') { return 'Hello world! This is my test route with not required parameter. If you do not type parameter value function start using it\'s default value ID = ' . $id; });
 
-Route::get('/my_test/{id}', function($id) { return 'Hello world! This is my test route with parameter ID = ' . $id; });
+//Route::get('/my_test/{id}', function($id) { return 'Hello world! This is my test route with parameter ID = ' . $id; });
+
+Route::group(['prefix' => 'my_test'], function() {
+    Route::get('', function() {
+        return 'Hello world! This is my test route :)';
+    });
+
+    Route::get('new/{id?}', function($id = 'default') {
+        return 'Hello world! This is my test route with not required parameter. If you do not type parameter value function start using it\'s default value ID = ' . $id;
+    });
+
+    ROute::get('{id}', function($id) {
+        return 'Hello world! This is my test route with parameter ID = ' . $id;
+    });
+});
 
 
