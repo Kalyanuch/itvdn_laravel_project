@@ -45,4 +45,4 @@ Route::group(['prefix' => 'my_test'], function() {
 
 Route::resource('users', 'UserController');
 
-Route::resource('catalog', 'CatalogController');
+Route::resource('catalog', 'CatalogController')->parameters(['catalog' => 'slug']);
