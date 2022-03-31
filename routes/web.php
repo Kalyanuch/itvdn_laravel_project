@@ -20,3 +20,11 @@ Route::resource('test', 'TestController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/my_test', function(){ return 'Hello world! This is my test route :)'; });
+
+Route::get('/my_test/new/{id?}', function($id = 'default') { return 'Hello world! This is my test route with not required parameter. If you do not type parameter value function start using it\'s default value ID = ' . $id; });
+
+Route::get('/my_test/{id}', function($id) { return 'Hello world! This is my test route with parameter ID = ' . $id; });
+
+
