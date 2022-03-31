@@ -36,9 +36,11 @@ Route::group(['prefix' => 'my_test'], function() {
         return 'Hello world! This is my test route with not required parameter. If you do not type parameter value function start using it\'s default value ID = ' . $id;
     });
 
-    ROute::get('{id}', function($id) {
+    Route::get('{id}', function($id) {
         return 'Hello world! This is my test route with parameter ID = ' . $id;
     });
 });
+
+Route::resource('users', 'UserController');
 
 
