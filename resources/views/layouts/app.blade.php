@@ -82,12 +82,7 @@
             @yield('content')
         </main>
 
-        <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-            <div class="footer-copyright py-3">
-                &copy; 2022 Copyright:
-                <a href="{{ route('index') }}">{{ config('app.name') | 'Laravel' }}</a>
-            </div>
-        </footer>
+        @include('layouts.common.footer')
     </div>
     <!-- Scripts -->
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}" defer></script>
