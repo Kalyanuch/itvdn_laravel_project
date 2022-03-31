@@ -52,9 +52,7 @@ class CatalogController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
 
-        $gallery = json_decode($product->gallery->photos);
-
-        return view('catalog.show', ['product' => $product, 'gallery' => $gallery]);
+        return view('catalog.show', ['product' => $product]);
     }
 
     /**

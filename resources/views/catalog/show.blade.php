@@ -16,9 +16,9 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    @foreach($gallery as $photo)
+                    @foreach($product->gallery->images as $photo)
                         <div class="col-3">
-                            <img src="{{ $photo }}" alt="" class="img-fluid img-thumbnail">
+                            <img src="{{ $photo->path }}" alt="" class="img-fluid img-thumbnail">
                         </div>
                     @endforeach
                 </div>
