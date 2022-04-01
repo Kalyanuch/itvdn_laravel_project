@@ -53,5 +53,5 @@ Route::prefix('cart')->group(function() {
     Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
     Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
-    Route::get('drop/{itemId}', 'CartController@drop')->name('cart.drop');
+    Route::get('drop', 'CartController@drop')->name('cart.drop');
 });

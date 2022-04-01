@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartDropItemRequest;
 use App\Http\Requests\CartUpdateRequest;
 use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -37,9 +38,9 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function drop($itemId)
+    public function drop(CartDropItemRequest $request)
     {
-        Cart::remove($itemId);
+        Cart::remove($request->productId);
 
         return redirect()->route('cart.index');
     }
