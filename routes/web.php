@@ -55,3 +55,5 @@ Route::prefix('cart')->group(function() {
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
     Route::get('drop', 'CartController@drop')->name('cart.drop');
 });
+
+Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);
