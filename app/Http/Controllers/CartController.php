@@ -37,5 +37,10 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    public function drop($itemId)
+    {
+        Cart::remove($itemId);
 
+        return redirect()->route('cart.index');
+    }
 }
