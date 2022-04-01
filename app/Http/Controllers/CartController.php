@@ -49,4 +49,18 @@ class CartController extends Controller
     {
         return view('cart.checkout');
     }
+
+    public function checkoutSuccess(Request $request)
+    {
+        if(Cart::count() == 0)
+            return redirect()->route('cart.checkout');
+
+        $order_info = $request->session()->get('order_info', null);
+
+        $request->session()->remove('order_info');
+
+        Cart::destroy();
+
+        return view('cart.success', ['order_id' => $order_info->id, 'username' => $order_info->customerName]);
+    }
 }

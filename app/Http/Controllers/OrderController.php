@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrderRequest;
 use App\Order;
+use App\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -33,9 +36,40 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrderRequest $request)
     {
-        //
+        $order = Order::create([
+            'customerName' => $request->customerName,
+            'customerLastName' => $request->customerLastName,
+            'customerEmail' => $request->customerEmail,
+            'customerPhone' => $request->customerPhone,
+            'customerAddress' => $request->customerAddress,
+            'comment' => $request->customerComment,
+            'total' => Cart::total(),
+        ]);
+
+        if($request->has('updateUser'))
+        {
+            $user = auth()->guest() ? User::where('email', $request->customerEmail) : auth()->user();
+
+            if(!is_null($user))
+            {
+                $user->update([
+                    'name' => $request->customerName,
+                    'lastname' => $request->customerLastName,
+                    'phone' => $request->customerPhone,
+                    'address' => $request->customerAddress
+                ]);
+
+                $order->update([
+                    'user_id' => $user->id
+                ]);
+            }
+        }
+
+        $request->session()->put('order_info', $order);
+
+        return redirect()->route('cart.checkout.success');
     }
 
     /**

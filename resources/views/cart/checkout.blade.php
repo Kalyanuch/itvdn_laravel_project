@@ -16,6 +16,13 @@
             <div class="col-md-8 mb-4">
                 <!--Card-->
                 <div class="card">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
                     <!--Card content-->
                     <form class="card-body" action="{{ route('order.store') }}" method="post">
                     {{ csrf_field() }}
@@ -52,7 +59,7 @@
                         <div class="form-group mb-5">
                             <label for="email" class="">Email</label>
                             <input type="text" id="email" class="form-control" placeholder="youremail@example.com"
-                                   name="customerEmail" value="{{ auth()->user()->email ?? null }}" required>
+                                   name="customerEmail" value="{{ auth()->user()->email ?? null }}">
                         </div>
 
                         <!--address-->

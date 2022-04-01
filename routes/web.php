@@ -54,6 +54,7 @@ Route::prefix('cart')->group(function() {
     Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
     Route::get('drop', 'CartController@drop')->name('cart.drop');
+    Route::get('checkout/success', 'CartController@checkoutSuccess')->name('cart.checkout.success');
 });
 
 Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);
