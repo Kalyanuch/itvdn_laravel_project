@@ -18,6 +18,13 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{{ route('cart.index') }}">
+                        <span class="badge red z-depth-1 mr-1"> {{ Cart::count() }}</span>
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                    </a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">

@@ -49,4 +49,5 @@ Route::resource('catalog', 'CatalogController')->parameters(['catalog' => 'slug'
 
 Route::prefix('cart')->group(function() {
     Route::get('add/{productId}', 'CartController@add')->name('cart.add');
+    Route::get('', 'CartController@index')->name('cart.index');
 });
