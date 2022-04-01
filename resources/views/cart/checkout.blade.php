@@ -17,11 +17,11 @@
                 <!--Card-->
                 <div class="card">
                     @if($errors->any())
-                        <div class="alert alert-danger">
-                            @foreach($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
-                        </div>
+                    <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                    </div>
                     @endif
                     <!--Card content-->
                     <form class="card-body" action="{{ route('order.store') }}" method="post">
