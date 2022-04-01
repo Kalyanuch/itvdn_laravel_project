@@ -48,6 +48,10 @@ Route::resource('users', 'UserController');
 Route::resource('catalog', 'CatalogController')->parameters(['catalog' => 'slug']);
 
 Route::prefix('cart')->group(function() {
-    Route::get('add/{productId}', 'CartController@add')->name('cart.add');
     Route::get('', 'CartController@index')->name('cart.index');
+    Route::post('update', 'CartController@update')->name('cart.update');
+    Route::get('destroy', 'CartController@destroy')->name('cart.destroy');
+    Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
+    Route::get('add/{productId}', 'CartController@add')->name('cart.add');
+    Route::get('drop/{itemId}', 'CartController@drop')->name('cart.drop');
 });

@@ -23,7 +23,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @yield('css_styles');
+    @yield('css_styles')
 </head>
 <body>
     <div id="app">
