@@ -46,3 +46,7 @@ Route::group(['prefix' => 'my_test'], function() {
 Route::resource('users', 'UserController');
 
 Route::resource('catalog', 'CatalogController')->parameters(['catalog' => 'slug']);
+
+Route::prefix('cart')->group(function() {
+    Route::get('add/{productId}', 'CartController@add')->name('cart.add');
+});
