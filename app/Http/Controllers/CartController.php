@@ -19,7 +19,7 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($productId);
 
-        Cart::add($product->id, $product->title, 1, $product->price);
+        Cart::add($product->id, $product->title, 1, $product->price)->associate(Product::class);
 
         return redirect()->back();
     }

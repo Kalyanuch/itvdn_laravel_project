@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Order;
+use App\OrderItem;
 use App\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -47,6 +48,16 @@ class OrderController extends Controller
             'comment' => $request->customerComment,
             'total' => Cart::total(),
         ]);
+
+        foreach(Cart::content() as $product)
+        {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product->model->id,
+                'price' => $product->model->price,
+                'quantity' => $product->qty,
+            ]);
+        }
 
         if($request->has('updateUser'))
         {
