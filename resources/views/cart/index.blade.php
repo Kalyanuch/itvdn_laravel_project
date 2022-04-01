@@ -55,7 +55,7 @@
         @else
             <blockquote class="blockquote bq-warning">
                 <p class="bq-title">Do you like our products?</p>
-                <p>Your cart is empty now. You can choose product in our <a href="{{ url('catalog') }}">catalog</a> and
+                <p>Your cart is empty now. You can choose product in our <a href="{{ route('catalog.index') }}">catalog</a> and
                     enjoy them!
                 </p>
             </blockquote>
