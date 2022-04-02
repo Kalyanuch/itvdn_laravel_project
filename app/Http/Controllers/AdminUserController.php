@@ -10,6 +10,8 @@ class AdminUserController extends Controller
 {
     public function index()
     {
+        $this->authorize('view', User::class);
+
         $users = User::paginate();
 
         return view('admin.users.index', compact('users'));
@@ -22,6 +24,8 @@ class AdminUserController extends Controller
 
     public function update(EditUserRequest $request, User $user)
     {
+        $this->authorize('update', User::class);
+
         $user->update([
             'name' => $request->name,
             'lastname' => $request->lastname,
@@ -37,6 +41,8 @@ class AdminUserController extends Controller
 
     public function delete(User $user)
     {
+        $this->authorize('delete', User::class);
+
         $user->delete();
 
         return redirect()->route('admin.users.index');
