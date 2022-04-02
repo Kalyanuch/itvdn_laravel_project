@@ -58,3 +58,8 @@ Route::prefix('cart')->group(function() {
 });
 
 Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'destroy', 'show']]);
+
+// Admin routes
+Route::group(['prefix' => 'admin-panel', 'middleware' => 'auth'], function() {
+    Route::get('/', 'AdminController@index');
+});
