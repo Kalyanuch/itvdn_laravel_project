@@ -65,10 +65,10 @@ Route::group(['prefix' => 'admin-panel', 'middleware' => 'auth'], function() {
 
     // Users
     Route::prefix('users')->group(function () {
-        Route::get('/', 'UserController@index')->name('admin.users.index');
-        Route::get('edit/{user}', 'UserController@edit')->name('admin.users.edit');
-        Route::put('edit/{user}', 'UserController@update')->name('admin.users.update');
-        Route::get('delete/{user}', 'UserController@delete')->name('admin.users.delete');
+        Route::get('/', 'AdminUserController@index')->name('admin.users.index');
+        Route::get('edit/{user}', 'AdminUserController@edit')->name('admin.users.edit');
+        Route::put('edit/{user}', 'AdminUserController@update')->name('admin.users.update');
+        Route::get('delete/{user}', 'AdminUserController@delete')->name('admin.users.delete');
     });
 
     // Products
