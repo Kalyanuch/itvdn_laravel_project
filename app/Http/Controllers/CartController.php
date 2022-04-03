@@ -4,12 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartDropItemRequest;
 use App\Http\Requests\CartUpdateRequest;
-use App\Product;
+use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    /**
+     * @var CartService
+     */
+    private $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     public function index()
     {
         return view('cart.index');
@@ -17,30 +27,28 @@ class CartController extends Controller
 
     public function add($productId)
     {
-        $product = Product::findOrFail($productId);
-
-        Cart::add($product->id, $product->title, 1, $product->price)->associate(Product::class);
+        $this->cartService->addProduct($productId);
 
         return redirect()->back();
     }
 
     public function update(CartUpdateRequest $request)
     {
-        Cart::update($request->productId, $request->qty);
+        $this->cartService->updateCart($request);
 
         return redirect()->route('cart.index');
     }
 
     public function destroy()
     {
-        Cart::destroy();
+        $this->cartService->clearCart();
 
         return redirect()->route('cart.index');
     }
 
     public function drop(CartDropItemRequest $request)
     {
-        Cart::remove($request->productId);
+        $this->cartService->dropProduct($request);
 
         return redirect()->route('cart.index');
     }
