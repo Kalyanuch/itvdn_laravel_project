@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 /*
 Route::get('/', function () {
     return view('welcome');
@@ -61,7 +62,7 @@ Route::resource('order', 'OrderController', ['only' => ['store', 'update', 'dest
 
 // Admin routes
 Route::group(['prefix' => 'admin-panel', 'middleware' => 'auth', 'adminPanel'], function() {
-    Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/', AdminController::class)->name('admin.index');
 
     // Users
     Route::prefix('users')->group(function () {
