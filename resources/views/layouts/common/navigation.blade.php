@@ -14,6 +14,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('catalog.index') }}">Catalog</a>
                 </li>
+                @if(isset(auth()->user()->is_admin) && auth()->user()->is_admin)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.index') }}">Admin</a>
+                </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
