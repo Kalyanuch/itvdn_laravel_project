@@ -99,6 +99,20 @@ class ProductController extends Controller
     }
 
     /**
+     * Delete from specified resource from storage
+     *
+     * @param \App\Product $product
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function delete(Product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('admin.products.index');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Product  $product
