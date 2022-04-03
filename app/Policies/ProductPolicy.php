@@ -64,7 +64,7 @@ class ProductPolicy
      * @param  \App\Product  $product
      * @return mixed
      */
-    public function restore(User $user, Product $product)
+    public function restore(User $user)
     {
         return $user->is_admin;
     }
@@ -76,7 +76,7 @@ class ProductPolicy
      * @param  \App\Product  $product
      * @return mixed
      */
-    public function forceDelete(User $user, Product $product)
+    public function forceDelete(User $user)
     {
         return $user->is_admin;
     }
