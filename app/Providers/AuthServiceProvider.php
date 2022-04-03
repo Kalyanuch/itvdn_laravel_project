@@ -29,13 +29,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+/*
         Gate::define('can-destroy', function(User $user) {
             return $user->is_admin;
         });
-
+*/
+        Gate::define('can-destroy', 'App\Policies\ProductPolicy@forceDelete');
+/*
         Gate::define('can-restore', function(User $user) {
             return $user->is_admin;
         });
+*/
+        Gate::define('can-restore', 'App\Policies\ProductPolicy@restore');
     }
 }
