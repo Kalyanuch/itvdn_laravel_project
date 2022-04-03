@@ -88,9 +88,14 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductFormRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+
+        foreach($request->categories as $categoryId)
+            $product->categories()->sync($categoryId);
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
