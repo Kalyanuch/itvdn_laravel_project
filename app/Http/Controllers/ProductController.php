@@ -113,13 +113,30 @@ class ProductController extends Controller
     }
 
     /**
+     * Restore the specified resource in storage
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore(int $id)
+    {
+        $product = Product::onlyTrashed()->whereId($id)->first();
+        $product->restore();
+
+        return redirect()->route('admin.products.index');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy(int $id)
     {
-        //
+        $product = Product::onlyTrashed()->whereId($id)->first();
+        $product->forceDelete();
+
+        return redirect()->route('admin.products.index');
     }
 }
