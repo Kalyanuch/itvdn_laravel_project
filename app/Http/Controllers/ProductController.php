@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\ProductFormRequest;
 use App\Product;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * @var ProductService
+     */
+    private $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -50,23 +61,9 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
 
-        $product = Product::create($request->all());
-
-        foreach($request->categories as $categoryId)
-            $product->categories()->attach($categoryId);
+        $this->productService->storeProduct($request);
 
         return redirect()->route('admin.products.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
     }
 
     /**
@@ -98,10 +95,7 @@ class ProductController extends Controller
     {
         $this->authorize('update', Product::class);
 
-        $product->update($request->all());
-
-        foreach($request->categories as $categoryId)
-            $product->categories()->sync($categoryId);
+        $this->productService->updateProduct($request, $product);
 
         return redirect()->route('admin.products.index');
     }
@@ -117,7 +111,7 @@ class ProductController extends Controller
     {
         $this->authorize('delete', Product::class);
 
-        $product->delete();
+        $this->productService->delete($product);
 
         return redirect()->route('admin.products.index');
     }
@@ -132,8 +126,7 @@ class ProductController extends Controller
     {
         $this->authorize('restore', Product::class);
 
-        $product = Product::onlyTrashed()->whereId($id)->first();
-        $product->restore();
+        $this->productService->restore($id);
 
         return redirect()->route('admin.products.index');
     }
@@ -148,8 +141,7 @@ class ProductController extends Controller
     {
         $this->authorize('forceDelete', Product::class);
 
-        $product = Product::onlyTrashed()->whereId($id)->first();
-        $product->forceDelete();
+        $this->productService->destroy($id);
 
         return redirect()->route('admin.products.index');
     }
