@@ -110,7 +110,7 @@
                     </table>
                 </div>
                 <!-- /.card-body -->
-            </div>destroy
+            </div>
             <!-- /.card -->
         </div>
     @endif

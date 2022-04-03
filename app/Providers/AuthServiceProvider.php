@@ -30,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('can-destroy', function(User $user) {
+            return $user->is_admin;
+        });
+
+        Gate::define('can-restore', function(User $user) {
+            return $user->is_admin;
+        });
     }
 }
