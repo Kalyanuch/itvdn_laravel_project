@@ -30,6 +30,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Product::class);
+
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
 
@@ -46,6 +48,8 @@ class ProductController extends Controller
      */
     public function store(ProductFormRequest $request)
     {
+        $this->authorize('create', Product::class);
+
         $product = Product::create($request->all());
 
         foreach($request->categories as $categoryId)
@@ -73,6 +77,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', Product::class);
+
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
 
@@ -90,6 +96,8 @@ class ProductController extends Controller
      */
     public function update(ProductFormRequest $request, Product $product)
     {
+        $this->authorize('update', Product::class);
+
         $product->update($request->all());
 
         foreach($request->categories as $categoryId)
@@ -107,6 +115,8 @@ class ProductController extends Controller
      */
     public function delete(Product $product)
     {
+        $this->authorize('delete', Product::class);
+
         $product->delete();
 
         return redirect()->route('admin.products.index');
@@ -120,6 +130,8 @@ class ProductController extends Controller
      */
     public function restore(int $id)
     {
+        $this->authorize('restore', Product::class);
+
         $product = Product::onlyTrashed()->whereId($id)->first();
         $product->restore();
 
@@ -134,6 +146,8 @@ class ProductController extends Controller
      */
     public function destroy(int $id)
     {
+        $this->authorize('forceDelete', Product::class);
+
         $product = Product::onlyTrashed()->whereId($id)->first();
         $product->forceDelete();
 
