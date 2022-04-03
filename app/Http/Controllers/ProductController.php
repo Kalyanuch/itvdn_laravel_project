@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\ProductFormRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -43,9 +44,14 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductFormRequest $request)
     {
-        //
+        $product = Product::create($request->all());
+
+        foreach($request->categories as $categoryId)
+            $product->categories()->attach($categoryId);
+
+        return redirect()->route('admin.products.index');
     }
 
     /**
