@@ -73,7 +73,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        $categories = $categories->pluck('name', 'id');
+
+        $productCategories = $product->categories()->pluck('id');
+
+        return view('admin.products.edit', compact('product','categories', 'productCategories'));
     }
 
     /**
